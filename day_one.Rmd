@@ -6,6 +6,32 @@ output:
 author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
 
-## Week 1 
+### Week 1 
 
 Fundamental data and collab skills - command line, comunicating science, R, meta-analysis and data management
+
+### Code of conduct
+
+A community document, review, contribute, etc. good for collaborative work.
+
+### Networks and Servers
+
+Network - physical or other connection between computers.
+
+Local network - physical connection, area network is > 2 comps. All computers are equally connected. Broadcast - sending a message, 
+
+Routing network, e.g., connecting networks through routers, routers know how to send info across networks. Router network may not be linear.
+
+Each host (e.g., personal comp) has an IP address, we use NCEAS address for workshop (it changes)
+```{r eval = T}
+system('ipconfig', intern = T)
+```
+
+Connect to remote server (NCEAS):
+```{r eval = F}
+ssh myname@aurora.nceas.ucsb.edu
+```
+
+Then enter password.
+
+
