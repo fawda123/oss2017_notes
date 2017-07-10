@@ -1,0 +1,11 @@
+---
+title: "Day one - 7/10"
+output: 
+  html_document:
+    keep_md: yes
+author: "Marcus W. Beck, beck.marcus@epa.gov"
+---
+
+## Week 1 
+
+Fundamental data and collab skills - command line, comunicating science, R, meta-analysis and data management
