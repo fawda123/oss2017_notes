@@ -178,7 +178,48 @@ $(document).ready(function () {
 ## [39] &quot;   Connection-specific DNS Suffix  . : &quot;</code></pre>
 <p>Connect to remote server (NCEAS):</p>
 <pre class="r"><code>ssh myname@aurora.nceas.ucsb.edu</code></pre>
-<p>Then enter password.</p>
+<p>Then enter password. Run <code>exit</code> to disconnect from server.</p>
+<p>Get a password manager- one password, last pass (free).</p>
+<p>Cloud computing - like networking but you don’t own the hardware.</p>
+</div>
+<div id="thinking-preferences" class="section level3">
+<h3>Thinking preferences</h3>
+<p>Intellectual, rational, instinctive, intuitive - you have all of these, know how to use them. I am not big-picture, holistic or emotional/intuitive by nature but I can access these. This is a tool though, it raises awareness of different modes of thinking.</p>
+</div>
+<div id="introduction-to-command-line-computing" class="section level3">
+<h3>Introduction to command-line computing</h3>
+<p>Look <a href="https://nceas.github.io/oss-lessons/servers-networks-command-line/2-commandline-intro.html">here</a></p>
+<p>Repeatibility and Efficiency - that’s what it’s all about.</p>
+<p>The standard OS model - software as applications and operating system, hardware as CPU, RAM, I/O</p>
+<p>Unix - everyone has their own user space, focuses on one tool/one command which can be chained together.</p>
+<p>Unix commands (file moving, creating, etc):</p>
+<ul>
+<li><code>cp</code> copy, <code>mv</code> move</li>
+<li><code>mkdir</code> makes a directory</li>
+<li><code>echo</code> put something in a file &gt; myfile.txt</li>
+<li><code>cat</code> concatenate or print something from a file</li>
+<li><code>&gt;</code> redirection operator to make a file</li>
+<li><code>cd</code> change directory, <code>cd ..</code> goes up to the parent directory</li>
+<li><code>ls</code> list or show files in a directory</li>
+<li><code>pwd</code> prints the workign directory, <code>tree .</code> shows file tree in current directory</li>
+<li><code>mv</code> moving a file or just changing a name of a file</li>
+<li><code>rm</code> remove/delete a file, use <code>rm -r mydir</code> removes a directory with files recursively</li>
+<li><code>rmdir</code> removes directories, but it’s not recursive</li>
+<li><code>|</code> is a pipe that sends output from one command to another</li>
+<li><code>man</code> says find a help file (manual) for a command, e.g., <code>man grep</code></li>
+</ul>
+<p>Reading text files in Unix:</p>
+<ul>
+<li><code>cat</code> print a file</li>
+<li><code>head</code> show top of file</li>
+<li><code>tail</code> show bottom of file</li>
+<li><code>grep</code> search for matching lines, e.g., <code>grep findme data/plotobs.csv</code></li>
+<li><code>less</code> view file interactively</li>
+</ul>
+<p>File folders are shown in blue in Unix CLI (command line interface)</p>
+<p>Aurora server uses Ubuntu.</p>
+<p>Every directory has one parent but a parent might have several children.</p>
+<p>tab completion works in unix for typing files.</p>
 </div>
 
 

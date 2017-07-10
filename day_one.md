@@ -71,6 +71,55 @@ Connect to remote server (NCEAS):
 ssh myname@aurora.nceas.ucsb.edu
 ```
 
-Then enter password.
+Then enter password. Run `exit` to disconnect from server. 
+
+Get a password manager- one password, last pass (free).
+
+Cloud computing - like networking but you don't own the hardware. 
+
+### Thinking preferences
+
+Intellectual, rational, instinctive, intuitive - you have all of these, know how to use them. I am not big-picture, holistic or emotional/intuitive by nature but I can access these. This is a tool though, it raises awareness of different modes of thinking.
+
+### Introduction to command-line computing
+
+Look [here](https://nceas.github.io/oss-lessons/servers-networks-command-line/2-commandline-intro.html)
+
+Repeatibility and Efficiency - that's what it's all about. 
+
+The standard OS model - software as applications and operating system, hardware as CPU, RAM, I/O 
+
+Unix - everyone has their own user space, focuses on one tool/one command which can be chained together.
+
+Unix commands (file moving, creating, etc):
+
+* `cp` copy, `mv` move
+* `mkdir` makes a directory
+* `echo` put something in a file > myfile.txt
+* `cat` concatenate or print something from a file
+* `>` redirection operator to make a file
+* `cd` change directory, `cd ..` goes up to the parent directory
+* `ls` list or show files in a directory
+* `pwd` prints the workign directory, `tree .` shows file tree in current directory
+* `mv` moving a file or just changing a name of a file
+* `rm` remove/delete a file, use `rm -r mydir` removes a directory with files recursively
+* `rmdir` removes directories, but it's not recursive
+* `|` is a pipe that sends output from one command to another
+* `man` says find a help file (manual) for a command, e.g., `man grep`
+
+Reading text files in Unix:
+
+* `cat` print a file
+* `head` show top of file
+* `tail` show bottom of file
+* `grep` search for matching lines, e.g., `grep findme data/plotobs.csv`
+* `less` view file interactively
 
 
+File folders are shown in blue in Unix CLI (command line interface)
+
+Aurora server uses Ubuntu.
+
+Every directory has one parent but a parent might have several children.
+
+tab completion works in unix for typing files. 
