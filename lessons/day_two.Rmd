@@ -1,0 +1,47 @@
+---
+title: "Day two - 7/11"
+output: 
+  html_document:
+    keep_md: yes
+author: "Marcus W. Beck, beck.marcus@epa.gov"
+---
+```{r, echo = F}
+library(knitr)
+opts_chunk$set(warning = F)
+```
+
+### Version control: git basics
+
+Distributed - you have the entire history of a git project on your local machine, applies to everyone working separately on a the same project. 
+
+See the git manual:
+```{r}
+system('git', intern = TRUE)
+```
+
+See your global configurations:
+```{r}
+system('git config --global --list', intern = TRUE)
+```
+
+Save your user credentials:
+```{r eval = F}
+# forever
+system('git config --global credential.helper cache', intern = TRUE)
+
+# for an hour
+system("git config --global credential.helper 'cache --timeout=3600'", intern = TRUE)
+
+```
+
+Show hidden files using `ls -a`, show files recursively `ls -R`. Look into cygwin or commander for a good windows shell.  
+
+`git clone` copy a remote repo to your local machine.  
+
+`vim favorite_desserts.csv` creates a file and enters the interactive text editor.  Enter text as needed.  To exit, press esc, `:w` to save, `:q` to quit.  
+ 
+ Or enter text from command line. 
+ ```
+ echo 'line 1, line 1' > favorite_desserts.csv
+ ```
+ To append to a file, use two carets `>>`.
