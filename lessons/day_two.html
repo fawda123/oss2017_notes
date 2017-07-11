@@ -181,9 +181,14 @@ system('git config --global credential.helper cache', intern = TRUE)
 # for an hour
 system(&quot;git config --global credential.helper 'cache --timeout=3600'&quot;, intern = TRUE)</code></pre>
 <p>Show hidden files using <code>ls -a</code>, show files recursively <code>ls -R</code>. Look into cygwin or commander for a good windows shell.</p>
-<p><code>git clone</code> copy a remote repo to your local machine.</p>
+<p><code>git clone</code> copy a remote repo to your local machine (or server)</p>
 <p><code>vim favorite_desserts.csv</code> creates a file and enters the interactive text editor. Enter text as needed. To exit, press esc, <code>:w</code> to save, <code>:q</code> to quit.</p>
 <p>Or enter text from command line. <code>echo 'line 1, line 1' &gt; favorite_desserts.csv</code> To append to a file, use two carets <code>&gt;&gt;</code>.</p>
+<p><code>git diff</code> shows what’s changed since last commit.</p>
+<p><code>git checkout -- filename</code> will revert a file back to its version in a previous commit.</p>
+<p>Putting a git repository on Aurora, login to Aurora with new Git Bash shell: <code>ssh beck@aurora.nceas.ucsb.edu</code> (to exit server execute <code>exit</code>)</p>
+<p>Then run: <code>git clone https://github.com/fawda123/myrepo.git</code> in whatever directory on Aurora.</p>
+<p>To see a file tree in Git Bash <code>cmd //c tree</code></p>
 </div>
 
 

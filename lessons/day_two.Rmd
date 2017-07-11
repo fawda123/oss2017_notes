@@ -36,7 +36,7 @@ system("git config --global credential.helper 'cache --timeout=3600'", intern = 
 
 Show hidden files using `ls -a`, show files recursively `ls -R`. Look into cygwin or commander for a good windows shell.  
 
-`git clone` copy a remote repo to your local machine.  
+`git clone` copy a remote repo to your local machine (or server)
 
 `vim favorite_desserts.csv` creates a file and enters the interactive text editor.  Enter text as needed.  To exit, press esc, `:w` to save, `:q` to quit.  
  
@@ -45,3 +45,14 @@ Show hidden files using `ls -a`, show files recursively `ls -R`. Look into cygwi
  echo 'line 1, line 1' > favorite_desserts.csv
  ```
  To append to a file, use two carets `>>`.
+ 
+ `git diff` shows what's changed since last commit. 
+ 
+ `git checkout -- filename` will revert a file back to its version in a previous commit.
+ 
+ Putting a git repository on Aurora, login to Aurora with new Git Bash shell:
+ `ssh beck@aurora.nceas.ucsb.edu` (to exit server execute `exit`)
+ 
+ Then run: `git clone https://github.com/fawda123/myrepo.git` in whatever directory on Aurora. 
+ 
+ To see a file tree in Git Bash `cmd //c tree`
