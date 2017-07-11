@@ -67,6 +67,7 @@ Unix commands (file moving, creating, etc):
 * `rmdir` removes directories, but it's not recursive
 * `|` is a pipe that sends output from one command to another
 * `man` says find a help file (manual) for a command, e.g., `man grep`
+* `scp` move files from local to remote, vice versa
 
 Reading text files in Unix:
 
@@ -84,3 +85,8 @@ Aurora server uses Ubuntu.
 Every directory has one parent but a parent might have several children.
 
 tab completion works in unix for typing files. 
+
+### R/Rstudio
+
+Log in here: https://aurora.nceas.ucsb.edu/rstudio/auth-sign-in, they have R/RStudio on their servers, fast!
+
