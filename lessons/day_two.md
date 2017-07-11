@@ -101,3 +101,22 @@ Show hidden files using `ls -a`, show files recursively `ls -R`. Look into cygwi
  Then run: `git clone https://github.com/fawda123/myrepo.git` in whatever directory on Aurora. 
  
  To see a file tree in Git Bash `cmd //c tree`
+
+### Communicating your research
+
+* Know your audience
+* Frame your message
+* Lead with results
+* Avoid jargon
+
+Create a hook, make it resonate
+
+The message box - lets you distill the message, target differnt audiences.  For the issue, id the problem, so what, solutions, benefits *do it in this order!*:
+
+* The issue: overarching topic, frames the rest of the box
+* The problem: the part of the big picture you're addressing, often the research question, sets you up for so what?
+* The so what: why your audience should continue caring or listening to you, like a prism where message goes through and exits depending on the audience
+* The solution: outlines options to address the problem, can your address use these solutions? 
+* The benefit: what benefits come from addressing the problem. Must connect with the so what.
+
+Making your message stick - no numbers!
