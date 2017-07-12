@@ -143,6 +143,54 @@ $(document).ready(function () {
 <pre class="bash"><code>man grep</code></pre>
 <p>Nest functions in Unix: <code>&lt;(sort paleo-mammals.txt)</code></p>
 <p>To go up a directory <code>../../mydir</code> goes up two directories to <code>mydir</code></p>
+<p>For unix, git options, <code>-l</code> single hyphen for abbreviated options, <code>--list</code> double hyphen for options in full.</p>
+<p><code>cut</code> functions let you pull out columns from a delimited text file.</p>
+<p><code>join</code> files is like the join functions in dplyr, sorta.</p>
+<p><code>sed</code> filters lines in a file.</p>
+</div>
+<div id="bash-loops" class="section level3">
+<h3>Bash loops</h3>
+<p>Programming philosophy - don’t repeat yourself (DRY)</p>
+<p>The basic loop syntax in bash:</p>
+<pre class="bash"><code>$ for filen in paleo*
+  do echo $filen
+done</code></pre>
+<p>This just prints file names to the CLI.</p>
+<p>In bash, <code>&gt;</code> is equivalent to <code>+</code> in R, prints this when it expects something else after a command.</p>
+<p>You can use <code>;</code> to put more than one command on the same line in bash (different from piping, like as in a loop).</p>
+<p>To put the output (<code>stdout</code>) as input (<code>stdin</code>) to something else you can use this symbol below tilde to enclose the input:</p>
+<pre class="bash"><code>for i in `seq 1 10`
+  do echo &quot;this is my $i&quot;
+done</code></pre>
+</div>
+<div id="simple-bash-scripts" class="section level3">
+<h3>Simple bash scripts</h3>
+<p>To create a shell script, top line starts with a <code>#1/bin/bash</code> to tell the shell which language the script is written for. Hash-bang is <code>#1</code>.</p>
+<p>To execute a script from CLI, precede with <code>./</code>. <code>@</code> is a generic variable that the system uses?</p>
+<p>An example bash script:</p>
+<pre class="bash"><code>#!/bin/bash
+
+# Example of a simple shell script
+# Do not really use this for backup!
+PREFIX=&quot;backup-&quot;
+FILES=$@
+for file in $FILES
+do
+    cp $file $PREFIX$file
+done</code></pre>
+<p>This can be executed from CLI:</p>
+<pre class="bash"><code>./crazy-back.sh paleo*</code></pre>
+<p>where all paleo* files are executed with the script, used within the script as <code>@</code>.</p>
+</div>
+<div id="data-management-and-data-repositories" class="section level3">
+<h3>Data management and data repositories</h3>
+<p>Big data - volume, velocity, and variation</p>
+<p>Data entropy - loss of data specificity with time from publication.</p>
+<p>Synthesis research concerned with discovery, integration, and analysis of data as subsets of the data life cycle. But these steps are wholly dependent on the others.</p>
+<p>Barriers to synthesis research: * data have not been preserved * if preserved, data are present in very dispersed, isolated repositories * lake of software interoperability * heterogeneity of data formats</p>
+<p>Solutions to synthesis research: * preserve * adopt standards * create networks * create interoperable software</p>
+<p>Examples of data repos: tdar, usgs, dryad, knb, ncei, arctic data center</p>
+<p><a href="https://www.re3data.org">re3data.org</a> - database of over 3000 data repositories - indexed by subject, domain, data type, etc.</p>
 </div>
 
 

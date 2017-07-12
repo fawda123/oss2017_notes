@@ -43,3 +43,95 @@ man grep
 Nest functions in Unix: `<(sort paleo-mammals.txt)`
 
 To go up a directory `../../mydir` goes up two directories to `mydir`
+
+For unix, git options, `-l` single hyphen for abbreviated options, `--list` double hyphen for options in full.
+
+`cut` functions let you pull out columns from a delimited text file.  
+
+`join` files is like the join functions in dplyr, sorta.  
+
+`sed` filters lines in a file. 
+
+### Bash loops
+
+Programming philosophy - don't repeat yourself (DRY)
+
+The basic loop syntax in bash:
+
+```bash 
+$ for filen in paleo*
+  do echo $filen
+done
+```
+This just prints file names to the CLI. 
+
+In bash, `>` is equivalent to `+` in R, prints this when it expects something else after a command. 
+
+You can use `;` to put more than one command on the same line in bash (different from piping, like as in a loop).
+
+To put the output (`stdout`) as input (`stdin`) to something else you can use this symbol below tilde to enclose the input:
+```bash
+for i in `seq 1 10`
+  do echo "this is my $i"
+done
+```
+
+### Simple bash scripts
+
+To create a shell script, top line starts with a `#1/bin/bash` to tell the shell which language the script is written for.  Hash-bang is `#1`.
+
+To execute a script from CLI, precede with `./`. `@` is a generic variable that the system uses?  
+
+An example bash script:
+```bash
+#!/bin/bash
+
+# Example of a simple shell script
+# Do not really use this for backup!
+PREFIX="backup-"
+FILES=$@
+for file in $FILES
+do
+    cp $file $PREFIX$file
+done
+```
+
+This can be executed from CLI:
+```bash
+./crazy-back.sh paleo*
+```
+where all paleo* files are executed with the script, used within the script as `@`. 
+
+### Data management and data repositories
+
+Big data - volume, velocity, and variation
+
+Data entropy - loss of data specificity with time from publication.  
+
+Synthesis research concerned with discovery, integration, and analysis of data as subsets of the data life cycle.  But these steps are wholly dependent on the others.  
+
+Barriers to synthesis research:
+* data have not been preserved
+* if preserved, data are present in very dispersed, isolated repositories
+* lake of software interoperability
+* heterogeneity of data formats
+
+Solutions to synthesis research:
+* preserve
+* adopt standards
+* create networks
+* create interoperable software
+
+Examples of data repos: tdar, usgs, dryad, knb, ncei, arctic data center
+
+[re3data.org](http://www.re3data.org/) - database of over 3000 data repositories - indexed by subject, domain, data type, etc. 
+
+EML - ecological metadata language
+
+knb - a repository at NCEAS, metacat is software managing the data/metadata on knb and is also an online user interface
+
+metadata - who, what, when, where, why, how of data.  It captures information, enables discovery, and enables exchange. Metadata standards provide a structure for describign the data with common terms, definitions, language, and structure. 
+
+DataONE is a federated network of data repositories, different from re3data where the latter is a registry of repositories that is more general.  DataOne has the data.  
+
+what, where, when - use in titleof data
