@@ -1,0 +1,45 @@
+---
+title: "Day three - 7/12"
+output: 
+  html_document:
+    keep_md: yes
+author: "Marcus W. Beck, beck.marcus@epa.gov"
+---
+
+### Unix command line tools
+
+Use this for bash commands in Rmd ` ```bash ` ` ``` `
+
+Text editors for Unix systems - vim, emacs, or nano, all run from CLI.  For example, run this to start the text editor: 
+
+```bash
+~$ nano myfile.txt
+```
+
+Then use `Ctrl + ` something to run commands, `^` is for ctrl.  
+
+RStudio can also be used on aurora to edit files.  
+
+Other useful unix commands:
+
+* `wc` count lines, words, characters
+* `diff` compare files
+* `sort` sort lines in a file
+* `uniq` report/filter repeated lines in a file (`sort` must be used first)
+
+Unix commands are `stdin` for input data, then two streams out for `stdout` for normal output and `stderr` for error output (`std` is standard).  There are operators to manipulate those in/as a pipe `|`.  You can choose to do different things with the output.
+
+For example, redirect the standar error (second pipe) to some null place: 
+
+```bash
+$ ls fakefile.txt 2> dev/null
+```
+
+Don't forget to check manual for options: 
+```bash
+man grep
+```
+
+Nest functions in Unix: `<(sort paleo-mammals.txt)`
+
+To go up a directory `../../mydir` goes up two directories to `mydir`
