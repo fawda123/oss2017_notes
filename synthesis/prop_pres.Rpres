@@ -3,6 +3,7 @@ Use of prior knowledge to inform restoration projects in estuaries of GOM
 author: Beck, Varela, Sherwood, Ireland, Dorans, Henkel - in no particular order
 date: July 14, 2017
 autosize: true
+css: oss.css
 
 Tampa Bay was gross
 ========================================================
