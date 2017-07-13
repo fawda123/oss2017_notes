@@ -1,7 +1,185 @@
 ---
-  title: "Day four - 7/13"
+title: "Day four - 7/13"
 output: 
   html_document:
   keep_md: yes
 author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
+
+### Editing metadata in R
+
+Use `library(EML)`
+
+```{r}
+library(EML)
+# library(arcticdatautils) # eml_creator
+
+doc <- read_eml('strix-pacific-northwest.xml')
+doc
+```
+
+Edit the creator field:
+```{r eval = F}
+doc@dataset@creator
+doc@dataset@creator <- c(eml_creator('Turbo', 'Todd'), email = 'turbotodd@rad.com')
+```
+Edit the abstract, write file.
+```{r, eval = F}
+# Change abstract to the better one we wrote
+doc@dataset@abstract <- as(set_TextType("better-abstract.md"), "abstract")
+
+# Save it back to the filesystem
+write_eml(doc, "strix-pacific-northwest.xml")
+```
+
+### Publishing data (on DataONE)
+
+Published as a data package which is one or more datasets and a metadata file.  
+
+An example:
+```{r,eval = T}
+library(dataone)
+library(datapack)
+library(uuid)
+
+# create an empty package
+dp <- new("DataPackage")
+dp
+```
+
+We then add a metadata file:
+```{r}
+emlFile <- "strix-pacific-northwest.xml"
+metadataObj <- new("DataObject", format="eml://ecoinformatics.org/eml-2.1.1", filename=paste(getwd(), emlFile, sep="/"),
+                   suggestedFilename=basename(emlFile))
+dp <- addData(dp, metadataObj)
+```
+
+We then add data:
+```{r eval = F}
+sourceData <- "sample.csv"
+sourceObj <- new("DataObject", format="text/csv", filename=paste(getwd(), sourceData, sep="/"), suggestedFilename=basename(sourceData))
+dp <- addData(dp, sourceObj, metadataObj)
+```
+
+Then maybe add some script for processing the data:
+```{r eval = F}
+progFile <- "filterSpecies.R"
+progObj <- new("DataObject", format="application/R", filename=paste(getwd(), progFile, sep="/"), mediaType="text/x-rsrc",
+                suggestedFilename=basename(progFile))
+dp <- addData(dp, progObj, metadataObj)
+```
+
+Then the processed data file is added:
+```{r eval = F}
+outputData <- "filteredSpecies.csv"
+outputObj <- new("DataObject", format="text/csv", filename=paste(getwd(), outputData, sep="/"), suggestedFilename=basename(outputData))
+dp <- addData(dp, outputObj, metadataObj)
+
+myAccessRules <- data.frame(subject="http://orcid.org/0000-0003-0077-4738", permission="changePermission") 
+
+dp
+```
+
+Finally, we upload the package to the Testing server for the KNB.
+```{r, eval=FALSE}
+d1c <- D1Client("STAGING2", "urn:node:mnTestKNB")
+packageId <- uploadDataPackage(d1c, dp, public=TRUE, accessRules=myAccessRules, quiet=FALSE)
+```
+
+This particular package contains the R script `filterSpecies.R`, the input file `sample.csv` that was read by
+the script and the output file `filteredSpecies.csv` that was created by the R script, which was run at a
+previous time.  
+
+You can now search for and view the package at https://dev.nceas.ucsb.edu
+
+**Make DataONE profile to doc and upload data!!**
+
+### Open data in R
+
+Go here to check out list of open data sources that can be dled from within R:
+
+[https://github.com/ropensci/opendata](https://github.com/ropensci/opendata)
+
+Examples:
+
+`rplos`: R client for the PLoS Journals API
+
+- Package: https://github.com/ropensci/rplos
+- Website: http://api.plos.org/
+
+```{r}
+library(rplos)
+searchplos(q='everything:"gulf of mexico"', fl='title', fq='doc_type:full', limit=10)
+```
+
+`rnaturalearth`: an R package to hold and facilitate interaction with natural earth map data **useful for geopolitical boundaries!!**
+
+- Website: www.naturalearthdata.com/
+- Package: https://github.com/ropenscilabs/rnaturalearth
+
+`rnoaa`: R interface to many NOAA data APIs 
+
+Access data like:
+
+- Air temps
+- Sea ice extent
+- Buoy data
+- Tons more!
+
+```{r}
+library(rnoaa)
+
+# Go here: http://www.ndbc.noaa.gov/
+# Find a station ID, like http://www.ndbc.noaa.gov/station_page.php?station=42039
+bd <- buoy(dataset = "cwind",  buoyid = 42039, datatype = "cc")
+plot(bd$data$wind_spd)
+```
+
+### Web Scraping 
+
+[Look here!](https://nceas.github.io/oss-lessons/data-liberation/intro-webscraping.html)
+
+Low-level packages: `Rcurl`, `httr` for basic requests (get, give)
+
+More user-friendly packages: `rvest`, `rselenium` (clicking buttons!!)
+
+Request to server, response from client - language
+
+HTML - blocks/tags in a hierarcy
+
+CSS - formatting HTML when it's rendered.  
+
+Selector-gadget...
+
+```{r}
+library("rvest")
+
+URL <- "http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/"
+
+# Read the webpage into R
+webpage <- read_html(URL)
+
+# Parse the webpage for bars
+# use selector gadget to identify nodes!!!!!!!!!!!!!
+bars <- html_nodes(webpage, ".neighborhoods-towns-business .neighborhoods-towns-business-title")
+
+# Extract the name of the bar
+bar_names <- html_text(bars)
+
+```
+
+Scrape some GIS files:
+
+```{r}
+url <- 'http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html'
+
+shps <- url %>% 
+  read_html %>% 
+  html_nodes(".dataBox a") %>% 
+  html_attr('href') %>% 
+  grep('\\.zip$', ., value = T) %>% 
+  paste0('http://sero.nmfs.noaa.gov', .)
+
+shps
+```
