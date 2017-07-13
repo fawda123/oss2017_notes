@@ -183,3 +183,48 @@ shps <- url %>%
 
 shps
 ```
+
+### Regular expression matching
+
+With stringr:
+```{r}
+library(stringr)
+
+fls <- list.files('C:/docs/oss2017_notes/lessons/', '*\\.Rmd$')
+str_view_all(fls, "three")
+```
+
+In regex, `[]` represents a list, so anything inside of here is matched, e.g., `[aeiou]` searches for vowels:
+
+```{r}
+str_detect(c('hello', 'this', 'is', 'sptwq'), '[aeiou]')
+```
+
+Digits can be searched for with `\\d` %>% 
+```{r}
+str_detect(c('asdfasdf8as', 'abc'), '\\d')
+```
+
+NOte that negation of the special characters is done with an upper-case, e.g., `\\D` finds everything that's not a digit:
+Digits can be searched for with `\\d` %>% 
+```{r}
+str_detect(c('asdfasdf8as', 'abc'), '\\D')
+```
+
+This is tricky because it says search for non-digit characters, which both strings have.  Note that the caret in the `[]` is a negation.
+```{r}
+grepl('[^0-9]', c('asdfasdf8as', 'abc'))
+```
+
+The `?` makes the preceding expression optional.
+```{r}
+grepl('a?b', c('a', 'b'))
+grepl('a?b', c('ab', 'bb'))
+```
+
+This needs to be debugged:
+```{r}
+addresses <- c("Santa Barbara, CA", "Seattle, WA", "New York, NY")
+str_replace(addresses, "(\\w+), (\\w+)", "City: \\1, State: \\2")
+```
+
