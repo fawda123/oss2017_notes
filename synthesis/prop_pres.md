@@ -4,56 +4,31 @@ author: Beck, Varela, Sherwood, Ireland, Dorans, Henkel - in no particular order
 date: July 14, 2017
 autosize: true
 
-Background
+Tampa Bay was gross
 ========================================================
+<img src="prop_pres-figure/TB_Dead_Fish.jpg" alt="Drawing" style="width: 800px;"/>
 
-* Systematic evaluation of water quality improvements from restoration projects in estuaries of the Gulf of Mexico is not practiced
-* Common goals of restoration projects are to improve and provide ecosystem services to a variety of stakeholders. 
-* These goals may include but are not limited to improvements in water quality and habitat restoration.
-* The potential cumulative impacts of these projects in the northern Gulf of Mexico are not systematically characterized as a means to inform future work. 
-
-Challenges
+Tampa Bay was gross
 ========================================================
+<img src="prop_pres-figure/TB_Algae.jpg" alt="Drawing" style="width: 800px;"/>
 
-* Best practices are not identified, well-documented, nor consistently applied
-* spatial/temporal variation across sites requires different assessment techniques
-* Limited resources contributes to insufficient development and evaluation of success metrics
-
-Research Questions
+Tampa Bay is not as gross
 ========================================================
-
-* How have restoration projects to-date influenced water quality in the GOM?
-* What is considered a metric of success in the context of stated restoration goals? 
-* Can we use this information to guide future restoration projects aimed at improving water quality?
-
-Importance
-========================================================
-
-* Close to $30b will be allocated for restoration efforts in GOM over the next twenty years.
-* **Prioritization** Quantitative assessments of the success of restoration activities will provide justification for past and future work, including tradeoffs between options - leading to more effective use of resources
-
-Methods
-========================================================
-
-* We will apply a Bayesian Decision Network as a support tool that incorporates expert knowledge and empirical observations in a theoretical framework to test hypotheses
-* We will use our prior knowledge of Tampa Bay where the historical context of water quality changes and a rich supporting database of restoration projects to develop an assessment framework for alternative projects. 
-
-Methods
-========================================================
-Tampa Bay is gross
-
 ![](prop_pres-figure/tb.jpg)
 
-Methods
+Tampa Bay is not as gross
 ========================================================
-This will solve our problems
+<img src="prop_pres-figure/TB_Tarpon.jpg" alt="Drawing" style="width: 800px;"/>
 
-![](prop_pres-figure/BN.jpg)
-
-Outcomes
+Tampa Bay is not as gross
 ========================================================
+![](prop_pres-figure/TB_Sunset.jpg)
 
-* A general and flexible framework that can be applied to unique locations and is not limited by data availability
-* Explicit quantification of uncertainty and model updates with new data
-* More focused restoration towards specific regional issues
-* Improved ability to predict outcomes of proposed restoration projects
+But how much less gross??
+========================================================
+![](prop_pres-figure/tampa_bay_restoration.jpg)
+
+But how much less gross??
+========================================================
+![](prop_pres-figure/network.png)
+

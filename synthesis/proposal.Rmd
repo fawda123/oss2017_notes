@@ -32,7 +32,6 @@ output: html_document
 
 * We will apply a Bayesian Decision Network as a support tool that incorporates expert knowledge and empirical observations in a theoretical framework to test hypotheses
 * We will use our prior knowledge of Tampa Bay where the historical context of water quality changes and a rich supporting database of restoration projects to develop an assessment framework for alternative projects. 
-[click](https://drive.google.com/open?id=0B81Qr-QTn5lHb0tic1BZOXloSGM)
 
 ### Outcomes
 
