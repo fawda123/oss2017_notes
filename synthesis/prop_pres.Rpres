@@ -11,7 +11,7 @@ Tampa Bay was gross
 
 Tampa Bay was gross
 ========================================================
-<img src="prop_pres-figure/TB_Algae.jpg" alt="Drawing" style="width: 800px;"/>
+<img src="prop_pres-figure/TB_Algae.png" alt="Drawing" style="width: 800px;"/>
 
 Tampa Bay is not as gross
 ========================================================
@@ -23,7 +23,7 @@ Tampa Bay is not as gross
 
 Tampa Bay is not as gross
 ========================================================
-![](prop_pres-figure/TB_Sunset.jpg)
+<img src="prop_pres-figure/TB_Sunset.jpg" alt="Drawing" style="width: 800px;"/>
 
 But how much less gross??
 ========================================================
