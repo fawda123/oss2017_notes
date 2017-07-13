@@ -1,40 +1,57 @@
----
-title: "Use of prior knowledge to inform restoration projects in estuaries of GOM"
-author: "Beck, Varela, Sherwood, Ireland, Dorans, Henkel - in no particular order"
-output: html_document
----
+Use of prior knowledge to inform restoration projects in estuaries of GOM
+========================================================
+author: Beck, Varela, Sherwood, Ireland, Dorans, Henkel - in no particular order
+date: July 14, 2017
+autosize: true
 
-### Background
+Background
+========================================================
 
 * Systematic evaluation of water quality improvements from restoration projects in estuaries of the Gulf of Mexico is not practiced
 * Common goals of restoration projects are to improve and provide ecosystem services to a variety of stakeholders. 
 * These goals may include but are not limited to improvements in water quality and habitat restoration.
 * The potential cumulative impacts of these projects in the northern Gulf of Mexico are not systematically characterized as a means to inform future work. 
 
-### Challenges
+Challenges
+========================================================
 
 * Best practices are not identified, well-documented, nor consistently applied
 * spatial/temporal variation across sites requires different assessment techniques
 * Limited resources contributes to insufficient development and evaluation of success metrics
 
-#### Research questions
+Research Questions
+========================================================
 
 * How have restoration projects to-date influenced water quality in the GOM?
 * What is considered a metric of success in the context of stated restoration goals? 
 * Can we use this information to guide future restoration projects aimed at improving water quality?
 
-### Importance
+Importance
+========================================================
 
 * Close to $30b will be allocated for restoration efforts in GOM over the next twenty years.
 * **Prioritization** Quantitative assessments of the success of restoration activities will provide justification for past and future work, including tradeoffs between options - leading to more effective use of resources
 
-### Methods
+Methods
+========================================================
 
 * We will apply a Bayesian Decision Network as a support tool that incorporates expert knowledge and empirical observations in a theoretical framework to test hypotheses
 * We will use our prior knowledge of Tampa Bay where the historical context of water quality changes and a rich supporting database of restoration projects to develop an assessment framework for alternative projects. 
-[click](https://drive.google.com/open?id=0B81Qr-QTn5lHb0tic1BZOXloSGM)
 
-### Outcomes
+Methods
+========================================================
+Tampa Bay is gross
+
+![](prop_pres-figure/tb.jpg)
+
+Methods
+========================================================
+This will solve our problems
+
+![](prop_pres-figure/BN.jpg)
+
+Outcomes
+========================================================
 
 * A general and flexible framework that can be applied to unique locations and is not limited by data availability
 * Explicit quantification of uncertainty and model updates with new data
