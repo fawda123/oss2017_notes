@@ -32,3 +32,11 @@ But how much less gross??
 ========================================================
 ![](prop_pres-figure/network.png)
 
+Benefits
+=============
+
+* A general and flexible framework that can be applied to unique locations and is not limited by data availability
+* Explicit quantification of uncertainty and model updates with new data
+* More focused restoration towards specific regional issues
+* Improved ability to predict outcomes of proposed restoration projects
+
