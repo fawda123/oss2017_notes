@@ -124,7 +124,7 @@ $(document).ready(function () {
 library(readxl)
 library(ggmap)
 
-fl &lt;- 'C:/Users/Marcus/Desktop/TBEP Restoration Database_11_21_07.xls'
+fl &lt;- 'data-raw/TBEP Restoration Database_11_21_07.xls'
 dat &lt;- fl %&gt;% 
   read_excel %&gt;% 
   select(Latitude, Longitude, Project_Completion_Date, Restoration_Technique, `Activity-1`, `Acres-1`) %&gt;% 

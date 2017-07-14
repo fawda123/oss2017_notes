@@ -10,7 +10,7 @@ library(tidyverse)
 library(readxl)
 library(ggmap)
 
-fl <- 'C:/Users/Marcus/Desktop/TBEP Restoration Database_11_21_07.xls'
+fl <- 'data-raw/TBEP Restoration Database_11_21_07.xls'
 dat <- fl %>% 
   read_excel %>% 
   select(Latitude, Longitude, Project_Completion_Date, Restoration_Technique, `Activity-1`, `Acres-1`) %>% 
