@@ -1,0 +1,69 @@
+---
+title: "Exploratory plots of restoration activities in TB"
+output: 
+  html_document:
+  keep_md: yes
+---
+
+```{r warning = F, message = F, fig.width = 8, fig.height = 4}  
+library(tidyverse)
+library(readxl)
+library(ggmap)
+
+fl <- 'C:/Users/Marcus/Desktop/TBEP Restoration Database_11_21_07.xls'
+dat <- fl %>% 
+  read_excel %>% 
+  select(Latitude, Longitude, Project_Completion_Date, Restoration_Technique, `Activity-1`, `Acres-1`) %>% 
+  rename(
+    lat = Latitude, 
+    lon = Longitude, 
+    date = Project_Completion_Date, 
+    tech = Restoration_Technique, 
+    type = `Activity-1`, 
+    acre = `Acres-1`
+  ) %>% 
+  mutate(
+    lat = as.numeric(lat),
+    lon = as.numeric(lon),
+    date = as.numeric(date)
+  )
+head(dat)
+
+ggplot(dat, aes(type, group = date, fill = factor(date))) + 
+  geom_bar(position = 'dodge') + 
+  theme_bw() + 
+  theme(
+    axis.title.x = element_blank(), 
+    legend.title = element_blank()
+    )
+
+ggplot(dat, aes(acre, group = type, fill = type)) + 
+  geom_histogram() + 
+  scale_x_log10('Acres') + 
+  facet_wrap(~type) + 
+  theme_bw() + 
+  theme(
+    legend.position = 'none'
+  )
+```
+
+```{r warning = F, message = F, fig.width = 6, fig.height = 8}  
+toplo <- filter(dat, lat > 0)  
+
+# extent
+ext <- make_bbox(toplo$lon, toplo$lat)
+map <- get_stamenmap(ext, zoom = 11, maptype = "toner-lite")
+
+# base map
+pbase <- ggmap(map) +
+  theme_bw() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  ) +
+  geom_point(data = toplo, aes(size = acre, fill = type), pch = 21, colour = 'black', alpha = 0.8) + 
+  scale_size(range = c(2, 11))
+pbase
+````
+
+         
