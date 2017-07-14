@@ -5,6 +5,9 @@ date: July 14, 2017
 autosize: true
 css: oss.css
 
+========================================================
+<img src="prop_pres-figure/consent.jpg" alt="Drawing" style="width: 800px;"/>
+
 Tampa Bay was gross
 ========================================================
 <img src="prop_pres-figure/TB_Dead_Fish.jpg" alt="Drawing" style="width: 800px;"/>
