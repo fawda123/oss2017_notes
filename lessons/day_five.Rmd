@@ -1,0 +1,20 @@
+---
+title: "Day five - 7/14"
+output: 
+  html_document:
+  keep_md: yes
+author: "Marcus W. Beck, beck.marcus@epa.gov"
+---
+
+### Meeting Facilitation: A simple decision making technique
+
+Extremes of facilitation - Robert's Rules (formal, e.g., motion to decree, etc.) to flip board brainstorming (informal, disorganizing)
+
+At DataOne - sticky dos and sticky dots
+* Sticky dos (notes) - give 4-5 notes per person, one idea per note, then go around in order to read notes, one idea per turn, repeat/refine
+* no discussion at time of idea, do not go out of order, no consolidation w/o discussion
+* Sticky dots - each person gets 3-5 dots, use the dots to identify top three options, then vote by putting dots by ideas on notes
+
+The person with the pen yields the power, don't let this bias the group!
+
+Primary dataset vs derived dataset - latter is a clean dataset from existing data. 
