@@ -48,7 +48,7 @@ ggplot(dat, aes(acre, group = type, fill = type)) +
 ```
 
 ```{r warning = F, message = F, fig.width = 6, fig.height = 8}  
-toplo <- filter(dat, lat > 0)  
+toplo <- filter(dat, lat > 27.3 & lat < 28.2)  
 
 # extent
 ext <- make_bbox(toplo$lon, toplo$lat)
