@@ -22,10 +22,6 @@ Tampa Bay is not as gross
 
 Tampa Bay is not as gross
 ========================================================
-<img src="prop_pres-figure/TB_Tarpon.jpg" alt="Drawing" style="width: 800px;"/>
-
-Tampa Bay is not as gross
-========================================================
 <img src="prop_pres-figure/TB_Sunset.jpg" alt="Drawing" style="width: 800px;"/>
 
 But how much less gross??
