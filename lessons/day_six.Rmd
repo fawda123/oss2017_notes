@@ -44,7 +44,7 @@ Effect size measured as:
 
 ### Workflow for systematic review
 
-Step 1: 
+#### Step 1: 
 
 Full workflow [here](https://nceas.github.io/oss-lessons/meta-analysis/step1.html)
 
@@ -63,7 +63,7 @@ In Web of Science - **View Citation Report** top right for summary of search res
 
 *The idea is to saves results from multiple searches (as text file), then cross-references for duplicates, relevance (by title/abstract), make final list (sort)*
 
-Step 2: sort - do a lot of this by hand, then you can make a flowchart diagram
+#### Step 2: sort - do a lot of this by hand, then you can make a flowchart diagram
 
 [step 2](https://nceas.github.io/oss-lessons/meta-analysis/step2.html)
 PRISMA - preferred reporting items for systematic review and meta-analysis
@@ -84,3 +84,20 @@ prisma(found = 156,
        width = 800, height = 800)
 ```
 
+#### Step 3: Synthesis
+
+a. extract evidence from the filtered list of eligible primary studies
+b. tabulate the evidence
+c. Data QA/QC and ensure you have what you need to do a meta.
+
+#### Step 4: Summarize
+
+You can use an evidence map to summarize.  This is also where a map (or heatmap) or stacked barplot can go.  Summarizes how well we have explored these topics.  
+
+#### Step 5: Statistics
+
+All stats are a tool and a means to an end, not the end. In most cases, a simple test is appropriate (t-test, ANOVA, Chi-squared test) where each study is an independent sample. 
+
+Effect size plots can be viewed with a forest plot.  
+
+Reference: [Meta-Analysis with R](http://www.springer.com/us/book/9783319214153), look for e-book though. 
