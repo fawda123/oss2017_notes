@@ -1,0 +1,43 @@
+---
+title: "Day six - 7/17"
+output: 
+  html_document:
+  keep_md: yes
+author: "Marcus W. Beck, beck.marcus@epa.gov"
+---
+
+### Meta-analysis
+
+We absolutely need the mechanics and the connections, but we also need the big picture (meta-analysis) - they are complementary
+
+Synthesis is the combination of two or more entitites - studies, regions, etc., the integration of evidence.  Maps are useful - where the work has been done. 
+
+Zen - mind and body, zen synthesis - mind is synthesis, body is data.  
+
+Systematic review are similar to meta-analysis.  A meta-analysis always has statistics, not always a p-value but gets effect sizes, variance, etc.  The systematic review is one-step below meta-analysis.
+
+The goal is to identify an effect size or average effort that matters to the big picture.  
+
+Synthesis is a counterweight to hyper-specialization - reduces silo effect among disciplines and sub-disciplines.  Diversity promotes discovery, conceptualizes complexity, and copes with data deluge.  
+
+Synthesis will shift your view of statistical significance. 
+
+<img src="https://image.slidesharecdn.com/zentheartofscientificsynthesis-140731203700-phpapp01/95/zen-the-art-of-scientific-synthesis-16-638.jpg?cb=1406905894"></img>
+
+Effect sizes much more important than p-values, the strength of the difference - important for primary studies.  
+
+Synthesis framing - from low to hi - natural concepts -> functional concepts -> integrative concepts. 
+
+Steps of meta-analysis - questions, set of studies, predictions (summarize knowledge, meta-analysis).  Each study is a sample point. 
+
+Systematic review has 'pre-specified eligibility criteria' aka your search terms for papers in the primary literature.  This commonly uses a PRISMA report or approach, e.g., we started with 2000 papers, filtered down to 20.  Can use Web of Science, SCOPUS, Google Scholar - use all. There are R packages to do this!!
+
+Meta-analysis/systematic review also very important for gap analysis.
+
+Meta-analysis always has an effect size, what was the strength of evidence plus variance and a measure of difference.  
+
+Effect size measured as:
+
+* weighted difference of treatment - control
+* natural log of treatment/control
+* difference of treatement minus control divided by treatment plus control
