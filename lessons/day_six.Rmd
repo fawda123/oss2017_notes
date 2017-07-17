@@ -41,3 +41,46 @@ Effect size measured as:
 * weighted difference of treatment - control
 * natural log of treatment/control
 * difference of treatement minus control divided by treatment plus control
+
+### Workflow for systematic review
+
+Step 1: 
+
+Full workflow [here](https://nceas.github.io/oss-lessons/meta-analysis/step1.html)
+
+a. pick an engine, document all search instances and record total number of returned hits   
+b. explore search term sensitivity and synonyms in detail  
+c. test >1 bibliometric resource  
+d. do not add publications 'by hand' or haphazardly  
+e. do check select publications (seminal and/or top cited) to calibrate search terms  
+f. use abstract surveys to ensure you are capturing the correct set of literature  
+g. do a search for key key terms by meta-analysis, review, and systematic review to avoid re-inventing the wheel or to ensure you are on the right track  
+h. review boolean operators in searching
+
+Step 1 notes: Search multiple search terms, don't forget to remove duplicates.  
+
+In Web of Science - **View Citation Report** top right for summary of search results!!!! Export as text or csv.
+
+*The idea is to saves results from multiple searches (as text file), then cross-references for duplicates, relevance (by title/abstract), make final list (sort)*
+
+Step 2: sort - do a lot of this by hand, then you can make a flowchart diagram
+
+[step 2](https://nceas.github.io/oss-lessons/meta-analysis/step2.html)
+PRISMA - preferred reporting items for systematic review and meta-analysis
+
+```{r warning = F, message = F}
+library(tidyverse)
+library(PRISMAstatement)
+
+prisma(found = 156,
+       found_other = 0,
+       no_dupes = 53, 
+       screened = 53, 
+       screen_exclusions = 0, 
+       full_text = 53,
+       full_text_exclusions = 24, 
+       qualitative = 0, 
+       quantitative = 29,
+       width = 800, height = 800)
+```
+
