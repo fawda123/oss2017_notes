@@ -1,0 +1,15 @@
+---
+title: "README"
+output: 
+  html_document:
+  keep_md: yes
+---
+
+To do: 
+
+* use git bash, not windows prompt
+* data files as netcdf
+* get password manager
+* use Postgres
+* upload data files to dataone
+* get linux/unix

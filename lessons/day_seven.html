@@ -122,8 +122,129 @@ $(document).ready(function () {
 </div>
 
 
-<div id="good-enough-data-modelling" class="section level3">
-<h3>Good enough data modelling</h3>
+<div id="good-enough-data-modelling-databases" class="section level3">
+<h3>Good enough data modelling (databases)</h3>
+<p>For today - understand basic tenets of basic relational data models, learn how to esign and create effective data tables in SQL, and learn to query tables in SQL. SQL is primary language to talk to data bases.</p>
+<p>Benefits of relational data systems - powerful search and filtering, handles large, complex datasets, enforce data integrity (set up rules for types of data), decrease errors with redundant updates. Such databases are ‘normalized’ with no repeating information (converse is de-normalized database).</p>
+<p>Normalized data is long format, de-normalized data is wide format.</p>
+<p>Rows always correspond to a single observation, columns always correspond to the same data type.</p>
+<p>Data tables aka entities, variables aka attributes. Rows are tuples, records, observations.</p>
+<p>Primary keys - a unique identifier for observations, foreign keys - reference to a primary key in another table. Keys are best as numeric values, rather than strings - makes for quicker indexing.</p>
+<p>Entity Relationship Model (ERM) - shows links between normalized tables via keys.</p>
+<p>Simple guidelines for effective data management (see Borer et al. 2009):</p>
+<ul>
+<li>design to add rows not columns</li>
+<li>Each column, one type</li>
+<li>Eliminate redundancy</li>
+<li>Uncorrected data file (for later processing with scripts)</li>
+<li>Header line</li>
+<li>Nonproprietary formats</li>
+<li>Descriptive names</li>
+<li>No spaces</li>
+</ul>
+</div>
+<div id="starting-sql-with-postgres" class="section level3">
+<h3>Starting SQL with Postgres</h3>
+<p><a href="https://nceas.github.io/oss-lessons/sql-database/02-sql-start.html">info here</a></p>
+<p>Available SQL software:</p>
+<ul>
+<li>PostgreSQL</li>
+<li>MariaDB</li>
+<li>sqlite</li>
+<li>Oracle</li>
+<li>MS Access</li>
+<li>MS SQL Server</li>
+</ul>
+<p>Just download PostgreSQL as a data management systems, create user, then create database using <code>createdb mydb</code> (as a PostgresQL command).</p>
+<p>Backslash symbols in PostgresSQL <code>\</code> precedes commands when you’re in a database. Use <code>\q</code> to quit.</p>
+<p>Other commands:</p>
+<p><code>\d</code> shows what’s in the database.<br />
+<code>;</code> ends a command</p>
+<p>This creates a table suing sql command <code>CREATE TABLE</code>:</p>
+<pre class="base"><code>CREATE TABLE sites (
+        siteid INT8,
+        altitude INT8, 
+        habitat VARCHAR(25), 
+        CONSTRAINT site_pk PRIMARY KEY (siteid)
+);</code></pre>
+<p>Above <code>site_pk</code> is a constraint or name of the primary key column (kind of redundant but can have multiple constraints in a column).</p>
+<p>This selects a variable from the table:</p>
+<pre class="bash"><code>oss=# SELECT * FROM sites;</code></pre>
+<p>Insert rows in a table (this is usually automated/scripted, you can also upload a whole csv):</p>
+<pre class="bash"><code>INSERT INTO sites (siteid, altitude, habitat) VALUES (1, 722, 'riparian');</code></pre>
+<p>Some queries, this one gets all columns from sites</p>
+<pre class="base"><code>SELECT * from sites;
+
+-- one column
+SELECT habitat from sites;
+
+-- two columns
+SELECT habitat, altitude from sites;
+
+-- get unique values, ordered in a column
+-- note that order by always follows from
+SELECT DISTINCT habitat from sites order by habitat;
+
+-- filter, use where, can string together conditions with AND/OR,
+-- % is wildcard in database world
+-- LIKE means similar to, = is exactly similar to
+-- NOT LIKE is inverse
+SELECT * from sites where altitude &gt;=500;
+SELECT * from sites where alitude &gt;= 500 AND habitat LIKE 'rip%'</code></pre>
+<p>Commands in Postgres are not case-sensitive.</p>
+<p>Fun with grouping and aggregation, typical ones are count, min, max, average, floor, ceiling, etc.</p>
+<pre class="bash"><code>-- SELECT, GROUP BY, ORDER BY (arrange) must reference same column
+-- takes count of unique habitat types, then arranges
+SELECT habitat, count(*) from sites GROUP BY habitat ORDER BY habitat;
+
+-- avg is average</code></pre>
+<p>Integrity constraints - these prevent operations on a table if you’ve setup a table to have constraints (e.g., no null values, or must be all unique). Errors should be informative and will request user input to continue.</p>
+<p>Update, delete, and transactions (lets you run commands without saving, then you have a chance to commit)… note that updates/deletes are permanent so be careful (maybe check query with SELECT first).</p>
+<pre class="bash"><code>-- change/update the altitude value for siteid is 1
+UPDATE sites SET altitude=721 where siteid=1;
+
+-- insert and delete a row
+INSERT INTO sites (siteid, altitude, habitat) VALUES (33, 121, 'forest');
+DELETE from sites where siteid = 33
+
+-- or run commands with transactions, then commit after
+START TRANSACTION;
+  DELETE FROM sites WHERE siteid &gt; 7;
+
+-- Then go back from the start use rollback if you dont want to keep changes
+ROLLBACK;
+
+-- or commit to keep, always check before commit
+COMMIT;
+</code></pre>
+<div id="batch-loading-data" class="section level4">
+<h4>Batch loading data</h4>
+<p>Create a table with column, types (blank at first):</p>
+<pre class="bash"><code>-- CREATE ANOTHER TABLE THAT WILL BE RELATED TO site
+CREATE TABLE plotobs (
+    obsid INT8,
+    siteid INT8, 
+    plot CHAR(10), 
+    date_sampled DATE, 
+    sciname VARCHAR(100),
+    diameter NUMERIC,
+    condition VARCHAR(10),
+    CONSTRAINT plotobs_pk PRIMARY KEY (obsid),
+    CONSTRAINT plotobs_site_fk FOREIGN KEY (siteid) REFERENCES sites
+);</code></pre>
+<p>Then load/import data into the empty table:</p>
+<pre class="bash"><code>-- Batch load data from a CSV file
+COPY plotobs FROM '/home/jones/oss-lessons/sql-database/plotobs.csv' DELIMITER ',' CSV HEADER;</code></pre>
+<p>Then some fun - aggregate, etc.</p>
+<pre class="bash"><code>SELECT sciname, avg(diameter) FROM plotobs GROUP BY sciname ORDER BY sciname;</code></pre>
+<p>Joins are also possible… represent with venn!!!</p>
+<p>Types of:</p>
+<ul>
+<li>inner - all shared ids between tables</li>
+<li>left - retain all ids from one table and only those that match from the other</li>
+<li>full - all combinations for all tables</li>
+</ul>
+</div>
 </div>
 
 

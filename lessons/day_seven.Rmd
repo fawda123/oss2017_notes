@@ -6,5 +6,176 @@ output:
 author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
 
-### Good enough data modelling
+### Good enough data modelling (databases)
+
+For today - understand basic tenets of basic relational data models, learn how to esign and create effective data tables in SQL, and learn to query tables in SQL.  SQL is primary language to talk to data bases. 
+
+Benefits of relational data systems - powerful search and filtering, handles large, complex datasets, enforce data integrity (set up rules for types of data), decrease errors with redundant updates.  Such databases are 'normalized' with no repeating information (converse is de-normalized database).
+
+Normalized data is long format, de-normalized data is wide format.
+
+Rows always correspond to a single observation, columns always correspond to the same data type.
+
+Data tables aka entities, variables aka attributes.  Rows are tuples, records, observations.
+
+Primary keys - a unique identifier for observations, foreign keys - reference to a primary key in another table.  Keys are best as numeric values, rather than strings - makes for quicker indexing. 
+
+Entity Relationship Model (ERM) - shows links between normalized tables via keys.
+
+Simple guidelines for effective data management (see Borer et al. 2009):
+
+* design to add rows not columns
+* Each column, one type
+* Eliminate redundancy
+* Uncorrected data file (for later processing with scripts)
+* Header line
+* Nonproprietary formats
+* Descriptive names
+* No spaces
+
+### Starting SQL with Postgres
+
+[info here](https://nceas.github.io/oss-lessons/sql-database/02-sql-start.html)
+
+Available SQL software:
+
+* PostgreSQL
+* MariaDB
+* sqlite
+* Oracle
+* MS Access
+* MS SQL Server
+
+Just download PostgreSQL as a data management systems, create user, then create database using `createdb mydb` (as a PostgresQL command). 
+
+Backslash symbols in PostgresSQL `\` precedes commands when you're in a database.  Use `\q` to quit.  
+
+Other commands:
+
+`\d` shows what's in the database.  
+`;` ends a command
+
+This creates a table suing sql command `CREATE TABLE`:
+```base
+CREATE TABLE sites (
+        siteid INT8,
+        altitude INT8, 
+        habitat VARCHAR(25), 
+        CONSTRAINT site_pk PRIMARY KEY (siteid)
+);
+```
+Above `site_pk` is a constraint or name of the primary key column (kind of redundant but can have multiple constraints in a column).
+
+This selects a variable from the table:
+```bash
+oss=# SELECT * FROM sites;
+```
+Insert rows in a table (this is usually automated/scripted, you can also upload a whole csv):
+```bash
+INSERT INTO sites (siteid, altitude, habitat) VALUES (1, 722, 'riparian');
+```
+
+Some queries, this one gets all columns from sites
+```base
+SELECT * from sites;
+
+-- one column
+SELECT habitat from sites;
+
+-- two columns
+SELECT habitat, altitude from sites;
+
+-- get unique values, ordered in a column
+-- note that order by always follows from
+SELECT DISTINCT habitat from sites order by habitat;
+
+-- filter, use where, can string together conditions with AND/OR,
+-- % is wildcard in database world
+-- LIKE means similar to, = is exactly similar to
+-- NOT LIKE is inverse
+SELECT * from sites where altitude >=500;
+SELECT * from sites where alitude >= 500 AND habitat LIKE 'rip%'
+```
+Commands in Postgres are not case-sensitive.
+
+Fun with grouping and aggregation, typical ones are count, min, max, average, floor, ceiling, etc.
+```bash
+-- SELECT, GROUP BY, ORDER BY (arrange) must reference same column
+-- takes count of unique habitat types, then arranges
+SELECT habitat, count(*) from sites GROUP BY habitat ORDER BY habitat;
+
+-- avg is average
+```
+
+Integrity constraints - these prevent operations on a table if you've setup a table to have constraints (e.g., no null values, or must be all unique). Errors should be informative and will request user input to continue. 
+
+Update, delete, and transactions (lets you run commands without saving, then you have a chance to commit)... note that updates/deletes are permanent so be careful (maybe check query with SELECT first).
+```bash
+-- change/update the altitude value for siteid is 1
+UPDATE sites SET altitude=721 where siteid=1;
+
+-- insert and delete a row
+INSERT INTO sites (siteid, altitude, habitat) VALUES (33, 121, 'forest');
+DELETE from sites where siteid = 33
+
+-- or run commands with transactions, then commit after
+START TRANSACTION;
+  DELETE FROM sites WHERE siteid > 7;
+
+-- Then go back from the start use rollback if you dont want to keep changes
+ROLLBACK;
+
+-- or commit to keep, always check before commit
+COMMIT;
+
+```
+
+#### Batch loading data
+
+Create a table with column, types (blank at first):
+
+```bash
+-- CREATE ANOTHER TABLE THAT WILL BE RELATED TO site
+CREATE TABLE plotobs (
+    obsid INT8,
+    siteid INT8, 
+    plot CHAR(10), 
+    date_sampled DATE, 
+    sciname VARCHAR(100),
+    diameter NUMERIC,
+    condition VARCHAR(10),
+    CONSTRAINT plotobs_pk PRIMARY KEY (obsid),
+    CONSTRAINT plotobs_site_fk FOREIGN KEY (siteid) REFERENCES sites
+);
+```
+
+Then load/import data into the empty table:
+```bash
+-- Batch load data from a CSV file
+COPY plotobs FROM '/home/jones/oss-lessons/sql-database/plotobs.csv' DELIMITER ',' CSV HEADER;
+```
+
+Then some fun - aggregate, etc.
+```bash
+SELECT sciname, avg(diameter) FROM plotobs GROUP BY sciname ORDER BY sciname;
+```
+
+Joins are also possible... represent with venn!!!
+
+Types of:
+
+* inner - all shared ids between tables
+* left - retain all ids from one table and only those that match from the other
+* full - all combinations for all tables
+
+In sql:
+```bash
+-- SIMPLE INNER JOIN, the WHERE is the join (the order of tables matters for left join)
+-- tables are referenced using sites s, plotobs p
+-- two columnsfrom sites, three columns from plotobs
+SELECT s.siteid, s.altitude, p.obsid, p.plot, p.sciname, p.diameter FROM sites s, plotobs p WHERE p.siteid = s.siteid;
+
+```
+Also, `UNION` and `INTERSECT` for concatenating, not merging.  
+
 
