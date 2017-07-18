@@ -244,7 +244,143 @@ COPY plotobs FROM '/home/jones/oss-lessons/sql-database/plotobs.csv' DELIMITER '
 <li>left - retain all ids from one table and only those that match from the other</li>
 <li>full - all combinations for all tables</li>
 </ul>
+<p>In sql:</p>
+<pre class="bash"><code>-- SIMPLE INNER JOIN, the WHERE is the join (the order of tables matters for left join)
+-- tables are referenced using sites s, plotobs p
+-- two columnsfrom sites, three columns from plotobs
+SELECT s.siteid, s.altitude, p.obsid, p.plot, p.sciname, p.diameter FROM sites s, plotobs p WHERE p.siteid = s.siteid;
+</code></pre>
+<p>Also, <code>UNION</code> and <code>INTERSECT</code> for concatenating, not merging.</p>
 </div>
+</div>
+<div id="sql-database-access-in-r" class="section level3">
+<h3>SQL database access in R</h3>
+<p>Two ways - run queries in R and get results, or connect to database with dplyr. Latter, use DBI library.</p>
+<p>Examples:</p>
+<pre class="r"><code>library(DBI)
+
+# put a database in memory
+# this creates a db and writes a table to memory, replace dbname with mydb.db to save to workspace
+con &lt;- dbConnect(RSQLite::SQLite(), dbname = &quot;:memory:&quot;)</code></pre>
+<p>The above command creates an empty database with no tables. We can confirm this is the case with <code>dbListTables()</code>:</p>
+<pre class="r"><code>dbListTables(con)</code></pre>
+<pre><code>## character(0)</code></pre>
+<p>Before we can do any useful querying, we need to load data into our database. Let’s load a <code>data.frame</code> into a table:</p>
+<pre class="r"><code>dbWriteTable(con, &quot;mtcars&quot;, mtcars)
+dbListTables(con)</code></pre>
+<pre><code>## [1] &quot;mtcars&quot;</code></pre>
+<p>We can immediately inspect what we just loaded like this:</p>
+<pre class="r"><code>dbListFields(con, &quot;mtcars&quot;)</code></pre>
+<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
+## [11] &quot;carb&quot;</code></pre>
+<pre class="r"><code>dbReadTable(con, &quot;mtcars&quot;)</code></pre>
+<pre><code>##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4  21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6  18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 12 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<p>Running queries is pretty simple:</p>
+<pre class="r"><code>dbGetQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)</code></pre>
+<pre><code>##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 2  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 3  22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 4  32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 5  30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 6  33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 7  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 8  27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 9  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 10 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 11 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<p>Often times, when working with database, we won’t want to see all of the rows because there are just too many to store in memory. In fact, that’s often the point of using the database in the first place.</p>
+<p>The <code>DBI</code> package lets us iterate through the rows in groups of our choosing so that memory usage stays low:</p>
+<pre class="r"><code>res &lt;- dbSendQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)
+
+while (!dbHasCompleted(res)) {
+  chunk &lt;- dbFetch(res, n = 5)
+  print(nrow(chunk))
+}</code></pre>
+<pre><code>## [1] 5
+## [1] 5
+## [1] 1</code></pre>
+<pre class="r"><code>dbClearResult(res)</code></pre>
+<p>Notice the output: 5, 5, 1. Since we specified <code>n = 5</code> in <code>dbFetch</code>, we get new rows in chunks of 5.</p>
+<p>After we’re done, our script should close its connection:</p>
+<pre class="r"><code>dbDisconnect(con)</code></pre>
+<p><strong>or we can use dplyr tricks to query databases</strong></p>
+<pre class="r"><code># Set up an SQLite database again, as before
+library(dplyr)
+library(dbplyr)
+library(DBI)
+
+con &lt;- dbConnect(RSQLite::SQLite(), dbname = &quot;:memory:&quot;)
+dbWriteTable(con, &quot;mtcars&quot;, mtcars)
+
+# Now the real magic
+mtcars_db &lt;- tbl(con, &quot;mtcars&quot;)
+mtcars_db</code></pre>
+<pre><code>## # Source:   table&lt;mtcars&gt; [?? x 11]
+## # Database: sqlite 3.19.3 [:memory:]
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21.0     6 160.0   110  3.90 2.620 16.46     0     1     4     4
+##  2  21.0     6 160.0   110  3.90 2.875 17.02     0     1     4     4
+##  3  22.8     4 108.0    93  3.85 2.320 18.61     1     1     4     1
+##  4  21.4     6 258.0   110  3.08 3.215 19.44     1     0     3     1
+##  5  18.7     8 360.0   175  3.15 3.440 17.02     0     0     3     2
+##  6  18.1     6 225.0   105  2.76 3.460 20.22     1     0     3     1
+##  7  14.3     8 360.0   245  3.21 3.570 15.84     0     0     3     4
+##  8  24.4     4 146.7    62  3.69 3.190 20.00     1     0     4     2
+##  9  22.8     4 140.8    95  3.92 3.150 22.90     1     0     4     2
+## 10  19.2     6 167.6   123  3.92 3.440 18.30     1     0     4     4
+## # ... with more rows</code></pre>
+<pre class="r"><code>mtcars_db %&gt;% 
+  select(mpg) %&gt;% 
+  show_query()
+
+mpg_query &lt;- mtcars_db %&gt;% 
+  group_by(cyl) %&gt;% 
+  summarize(mean(mpg))
+
+mpg_query %&gt;% 
+  show_query()
+
+# To get the data out of our query, we use collect()
+class(mpg_query)</code></pre>
+<pre><code>## [1] &quot;tbl_dbi&quot;  &quot;tbl_sql&quot;  &quot;tbl_lazy&quot; &quot;tbl&quot;</code></pre>
+<pre class="r"><code>mpg_query %&gt;% 
+  collect() %&gt;% 
+  class()</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 </div>
 
 

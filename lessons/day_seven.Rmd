@@ -178,4 +178,103 @@ SELECT s.siteid, s.altitude, p.obsid, p.plot, p.sciname, p.diameter FROM sites s
 ```
 Also, `UNION` and `INTERSECT` for concatenating, not merging.  
 
+### SQL database access in R
 
+Two ways - run queries in R and get results, or connect to database with dplyr.  Latter, use DBI library. 
+
+Examples:
+
+```{r, message = F, warning = F}
+library(DBI)
+
+# put a database in memory
+# this creates a db and writes a table to memory, replace dbname with mydb.db to save to workspace
+con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+```
+
+The above command creates an empty database with no tables.
+We can confirm this is the case with `dbListTables()`:
+
+```{r}
+dbListTables(con)
+```
+
+Before we can do any useful querying, we need to load data into our database.
+Let's load a `data.frame` into a table:
+
+```{r}
+dbWriteTable(con, "mtcars", mtcars)
+dbListTables(con)
+```
+
+We can immediately inspect what we just loaded like this:
+
+```{r}
+dbListFields(con, "mtcars")
+dbReadTable(con, "mtcars")
+```
+
+Running queries is pretty simple:
+
+```{r}
+dbGetQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
+```
+
+Often times, when working with database, we won't want to see all of the rows because there are just too many to store in memory.
+In fact, that's often the point of using the database in the first place.
+
+The `DBI` package lets us iterate through the rows in groups of our choosing so that memory usage stays low:
+
+```{r}
+res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
+
+while (!dbHasCompleted(res)) {
+  chunk <- dbFetch(res, n = 5)
+  print(nrow(chunk))
+}
+
+dbClearResult(res)
+```
+
+Notice the output: 5, 5, 1.
+Since we specified `n = 5` in `dbFetch`, we get new rows in chunks of 5.
+
+After we're done, our script should close its connection:
+
+```{r}
+dbDisconnect(con)
+```
+
+**or we can use dplyr tricks to query databases**
+
+```{r warning = F, message = F}
+# Set up an SQLite database again, as before
+library(dplyr)
+library(dbplyr)
+library(DBI)
+
+con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+dbWriteTable(con, "mtcars", mtcars)
+
+# Now the real magic
+mtcars_db <- tbl(con, "mtcars")
+mtcars_db
+
+mtcars_db %>% 
+  select(mpg) %>% 
+  show_query()
+
+mpg_query <- mtcars_db %>% 
+  group_by(cyl) %>% 
+  summarize(mean(mpg))
+
+mpg_query %>% 
+  show_query()
+
+# To get the data out of our query, we use collect()
+class(mpg_query)
+mpg_query %>% 
+  collect() %>% 
+  class()
+
+```
