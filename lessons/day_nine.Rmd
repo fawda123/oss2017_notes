@@ -5,3 +5,36 @@ output:
   keep_md: yes
 author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
+
+### Reproducible research
+
+Provenance - origin and processing history of data:
+
+* Audit trail
+* Attribution/credit
+* Replication and reproducible research
+* Discover of data, methodologies, experiments
+
+National Climate Assessment is **transparent**
+
+KNB framework promotes provenance. 
+
+Recordr R Library for recording provenance of data
+
+For provenance, we need to know for any given script/workflow, what's the output and what's the required input.  
+
+Look here for tutorial on uploading provenance data: <https://github.com/NCEAS/oss-lessons/blob/gh-pages/publishing-data/upload-data.Rmd>
+
+### RMarkdown 
+
+Links without a separate tag: <http://www.google.com>
+```
+<http://www.google.com>
+```
+As opposed to:
+```
+[http://www.google.com](http://www.google.com)
+```
+
+
+
