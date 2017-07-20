@@ -7,3 +7,23 @@ author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
 
 ### Data munging, qaqc, cleaning
+
+dplyr, tidyr stuff - `separate`, `gather`, `spread`
+
+### Scientific workflows
+
+GitHub is not an archive!!!!
+
+Zonodo is a public archive - more for software?  
+
+Reproducible Science has analytical transparency, automated analyses, archived and shared. It's also about modularity - one task, one component of the workflow.  It's also about provenance.  
+
+Workflow software - Kepler, Galaxy, etc. 
+
+Function name is a verb that shows what is done... This lets the analysis workflow be displayed as action verbs (think in pipes).
+
+Workflow diagrams are color-coded - red are data, purple are automated, yellow are data healing (usually manual) - look into Unified Modelling Language!
+
+### Writing functions
+
+Scoping - how much a function does, should be a minimal unit.  

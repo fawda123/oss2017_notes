@@ -11,5 +11,6 @@ To do:
 * data files as netcdf
 * get password manager
 * use Postgres
-* upload data files to dataone
+* upload data files to dataone/knb using NCEAS R packages
+* doi release for GitHub repos with zenodo
 * get linux/unix
