@@ -7,3 +7,59 @@ author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
 
 ### Microbial Metagenomics
+
+Old way of characterizing microbial community - put it on a plate and see what grows, not very good - not everything grows on a plate.  
+
+New way - take a sample, extract dna in the field, then sequence it. Two approaches:
+
+* shotgun metagenomics - get everything - all genes
+* targeted - just a single region - 16S gene that is conserved in all bacteria so look only for that without having to sequence the entire genome. 
+
+Functional analysis - Looking what things do vs who is there.  Look at functional traits. 
+
+Caveats of metagenomic sequencing:
+
+* undersampling is common
+* database limitations for species we don't know about
+* sequencing active v dormant communities
+* sequencing errors
+
+Genomic (after sequencing) to tabular data - how is this done?  Focus of mini-session...
+
+First we get on the cloud... for cloud computing. Genomic data are big - GB to TB, do not do locally.  Amazon AWS is one way to connect, NSF has JetStream
+
+Unix commands:
+```bash
+# get user name
+whoami
+
+# tree at different levls
+tree -L 2
+```
+
+`rsync` to load data from local to cloud. Also see this <https://data-lessons.github.io/cloud-genomics/03-moving-data/> 
+
+Use `tmux` to start and attach a session to the cloud, which will run if you disconnect from the server.  You can reconnect later. To detach use ctrl^b d, this will leave the session running.  ctrl^d will just exit tmux completely.  To see the sessions:
+
+`tmux list-sessions`
+
+You can have multiple tmux sessions running - to attach/reattach to a particular sessions (sesion names are on the left under `list-sessions`):
+
+```bash
+tmux attach -t session_name
+```
+
+To kill a tmux session: `tmux kill-session -t session_name`
+
+Back to genomics - '.fastq' file is what you get from the sequencing center.
+
+`wc file-name` number of lines, word, character
+
+Searching tex files: `less` then `\tofind`, also you can use `grep` within `less`
+
+QAQC - based on quality score in fastq file. FastQC is a program that can be used.  
+
+List files long format with -h option for 'human' reading option. 
+```bash
+ls -lh
+```
