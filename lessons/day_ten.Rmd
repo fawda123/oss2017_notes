@@ -55,7 +55,7 @@ Back to genomics - '.fastq' file is what you get from the sequencing center.
 
 `wc file-name` number of lines, word, character
 
-Searching tex files: `less` then `\tofind`, also you can use `grep` within `less`
+Searching text files: `less` then `\tofind`, also you can use `grep` within `less`
 
 QAQC - based on quality score in fastq file. FastQC is a program that can be used.  
 
@@ -63,3 +63,7 @@ List files long format with -h option for 'human' reading option.
 ```bash
 ls -lh
 ```
+
+### How to build a community of practice with OSS
+
+Training! Data carpentry... Teaching teach to teach
