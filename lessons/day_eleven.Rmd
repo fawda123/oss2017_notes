@@ -128,8 +128,11 @@ Reproject the raster:
 ```{r}
 hshade <- projectRaster(hshade, crs = crs(usl))
 crs(hshade)
-plot(loc)
-plot(hshade, col = grey(1:100/100), add = TRUE)
+plot(locnew)
+plot(hshade, col = grey(1:100/100), add = T )
 plot(clip, add = TRUE)
 ```
 
+### Publishing maps to the web
+
+Tiling, makes zooming/panning very easy, different layers at different resolutions are downloaded on the fly depending on zoom and location.  This is what leaflet is doing. 
