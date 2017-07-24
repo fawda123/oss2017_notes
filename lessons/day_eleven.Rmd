@@ -6,3 +6,130 @@ output:
 author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
 
+### GIS and geospatial concepts
+
+#### Basics
+
+[Lecture](https://nceas.github.io/oss-lessons/spatial-data-gis-law/1-mon-spatial-data-intro.html)
+
+Spatial data structures - shapefile is not the only one, look into GeoJSON
+
+R creates extent objects - basically the boundin box
+
+datum - spatial/vertical reference
+
+Pixel - picture element
+
+#### QGIS
+
+Built in Python - can code in Python, works with GRASS, gdal.  Good for checking your work from R.
+
+Look up website for spatial references: <http://spatialreference.org/>
+
+EPSG is mostly used in Python, proj4 is mostly usedin R - these are storage formats for defining the coordinate reference system. 
+
+gdal is an open-source GIS library, its like an open version of the guts of ArcGIS.
+
+QGIS has lots of plugins from user community. 
+
+QGIS browser is like ArcGIS catalog.
+
+Some processing of spatial data in R:
+
+```{r warning = F, message = F}
+# load these libraries
+library(rgdal)
+library(raster)
+library(rgeos)
+library(leaflet)
+
+# import some data
+coastlines <- readOGR('../GISdata/ne-coastlines-10m/ne_10m_coastline.shp')
+
+# plot 
+plot(coastlines)
+
+# metadata
+class(coastlines)
+extent(coastlines) # spatial extent
+crs(coastlines) # coordinate reference system, proj 4
+ext_obj <- extent(coastlines) # this is an S4 class
+ext_obj@xmin
+```
+
+Simplify our data with simplify:
+```{r}
+# tol is trial and error, the larger the number the more simplification
+coastlines_simp <- gSimplify(coastlines, tol = 3, topologyPreserve = TRUE)
+plot(coastlines_simp)
+```
+
+Leaflet example:
+```{r}
+leaflet(coastlines_simp) %>%
+  addTiles() %>% 
+  addPolylines(color = 'red', weight = 3, smoothFactor = 0.5)
+```
+
+Conflicting coordinate systems plots nothing:
+```{r}
+loc <- readOGR('../GISdata/study-area/study-area-merc.shp')
+usl <- readOGR('../GISdata/us-boundaries/us_bound_pop.shp')
+crs(loc)
+crs(usl)
+plot(loc)
+plot(usl, add = TRUE)
+```
+
+Should look like this:
+```{r}
+loc <- readOGR('../GISdata/study-area/study-area.shp')
+usl <- readOGR('../GISdata/us-boundaries/us_bound_pop.shp')
+crs(loc)
+crs(usl)
+plot(loc)
+plot(usl, add = TRUE)
+```
+
+So you can also change the coordinate system:
+```{r}
+loc <- readOGR('../GISdata/study-area/study-area-merc.shp')
+locnew <- spTransform(loc, 
+  CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+
+plot(locnew)
+plot(usl, add = TRUE)
+```
+
+Clip with **gIntersection**
+```{r}
+clip <- gIntersection(locnew, usl, byid = TRUE, drop_lower_td = TRUE)
+plot(clip)
+```
+
+Or clip this way with **crop**, note argument order switch.
+```{r}
+clip <- crop(usl, locnew)
+plot(clip)
+```
+
+General global layers: <https://www.naturalearthdata.com> and an R package to access <https://github.com/ropenscilabs/rnaturalearth>
+
+Raster stuff:
+```{r}
+# import a hillshade layer
+hshade <- raster('../GISdata/hillshade/hillshade_3395.tif')
+crs(hshade)
+extent(hshade)
+plot(hshade, col = grey(1:100/100))
+```
+
+Reproject the raster:
+```{r}
+hshade <- projectRaster(hshade, crs = crs(usl))
+crs(hshade)
+plot(loc)
+plot(hshade, col = grey(1:100/100), add = TRUE)
+plot(clip, add = TRUE)
+```
+
