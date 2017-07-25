@@ -44,7 +44,7 @@ library(rgeos)
 library(leaflet)
 
 # import some data
-coastlines <- readOGR('../GISdata/ne-coastlines-10m/ne_10m_coastline.shp')
+coastlines <- readOGR('GISdata/ne-coastlines-10m/ne_10m_coastline.shp')
 
 # plot 
 plot(coastlines)
@@ -73,8 +73,8 @@ leaflet(coastlines_simp) %>%
 
 Conflicting coordinate systems plots nothing:
 ```{r}
-loc <- readOGR('../GISdata/study-area/study-area-merc.shp')
-usl <- readOGR('../GISdata/us-boundaries/us_bound_pop.shp')
+loc <- readOGR('GISdata/study-area/study-area-merc.shp')
+usl <- readOGR('GISdata/us-boundaries/us_bound_pop.shp')
 crs(loc)
 crs(usl)
 plot(loc)
@@ -83,8 +83,8 @@ plot(usl, add = TRUE)
 
 Should look like this:
 ```{r}
-loc <- readOGR('../GISdata/study-area/study-area.shp')
-usl <- readOGR('../GISdata/us-boundaries/us_bound_pop.shp')
+loc <- readOGR('GISdata/study-area/study-area.shp')
+usl <- readOGR('GISdata/us-boundaries/us_bound_pop.shp')
 crs(loc)
 crs(usl)
 plot(loc)
@@ -93,7 +93,7 @@ plot(usl, add = TRUE)
 
 So you can also change the coordinate system:
 ```{r}
-loc <- readOGR('../GISdata/study-area/study-area-merc.shp')
+loc <- readOGR('GISdata/study-area/study-area-merc.shp')
 locnew <- spTransform(loc, 
   CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
 
@@ -118,7 +118,7 @@ General global layers: <https://www.naturalearthdata.com> and an R package to ac
 Raster stuff:
 ```{r}
 # import a hillshade layer
-hshade <- raster('../GISdata/hillshade/hillshade_3395.tif')
+hshade <- raster('GISdata/hillshade/hillshade_3395.tif')
 crs(hshade)
 extent(hshade)
 plot(hshade, col = grey(1:100/100))

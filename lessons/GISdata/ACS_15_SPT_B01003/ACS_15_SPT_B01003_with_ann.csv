@@ -1,0 +1,54 @@
+GEO.id,GEO.id2,GEO.display-label,POPGROUP.id,POPGROUP.display-label,HD01_VD01,HD02_VD01
+Id,Id2,Geography,Id,Population Group,Estimate; Total,Margin of Error; Total
+0400000US01,01,Alabama,001,Total population,4830620,*****
+0400000US02,02,Alaska,001,Total population,733375,*****
+0400000US04,04,Arizona,001,Total population,6641928,*****
+0400000US05,05,Arkansas,001,Total population,2958208,*****
+0400000US06,06,California,001,Total population,38421464,*****
+0400000US08,08,Colorado,001,Total population,5278906,*****
+0400000US09,09,Connecticut,001,Total population,3593222,*****
+0400000US10,10,Delaware,001,Total population,926454,*****
+0400000US11,11,District of Columbia,001,Total population,647484,*****
+0400000US12,12,Florida,001,Total population,19645772,*****
+0400000US13,13,Georgia,001,Total population,10006693,*****
+0400000US15,15,Hawaii,001,Total population,1406299,*****
+0400000US16,16,Idaho,001,Total population,1616547,*****
+0400000US17,17,Illinois,001,Total population,12873761,*****
+0400000US18,18,Indiana,001,Total population,6568645,*****
+0400000US19,19,Iowa,001,Total population,3093526,*****
+0400000US20,20,Kansas,001,Total population,2892987,*****
+0400000US21,21,Kentucky,001,Total population,4397353,*****
+0400000US22,22,Louisiana,001,Total population,4625253,*****
+0400000US23,23,Maine,001,Total population,1329100,*****
+0400000US24,24,Maryland,001,Total population,5930538,*****
+0400000US25,25,Massachusetts,001,Total population,6705586,*****
+0400000US26,26,Michigan,001,Total population,9900571,*****
+0400000US27,27,Minnesota,001,Total population,5419171,*****
+0400000US28,28,Mississippi,001,Total population,2988081,*****
+0400000US29,29,Missouri,001,Total population,6045448,*****
+0400000US30,30,Montana,001,Total population,1014699,*****
+0400000US31,31,Nebraska,001,Total population,1869365,*****
+0400000US32,32,Nevada,001,Total population,2798636,*****
+0400000US33,33,New Hampshire,001,Total population,1324201,*****
+0400000US34,34,New Jersey,001,Total population,8904413,*****
+0400000US35,35,New Mexico,001,Total population,2084117,*****
+0400000US36,36,New York,001,Total population,19673174,*****
+0400000US37,37,North Carolina,001,Total population,9845333,*****
+0400000US38,38,North Dakota,001,Total population,721640,*****
+0400000US39,39,Ohio,001,Total population,11575977,*****
+0400000US40,40,Oklahoma,001,Total population,3849733,*****
+0400000US41,41,Oregon,001,Total population,3939233,*****
+0400000US42,42,Pennsylvania,001,Total population,12779559,*****
+0400000US44,44,Rhode Island,001,Total population,1053661,*****
+0400000US45,45,South Carolina,001,Total population,4777576,*****
+0400000US46,46,South Dakota,001,Total population,843190,*****
+0400000US47,47,Tennessee,001,Total population,6499615,*****
+0400000US48,48,Texas,001,Total population,26538614,*****
+0400000US49,49,Utah,001,Total population,2903379,*****
+0400000US50,50,Vermont,001,Total population,626604,*****
+0400000US51,51,Virginia,001,Total population,8256630,*****
+0400000US53,53,Washington,001,Total population,6985464,*****
+0400000US54,54,West Virginia,001,Total population,1851420,*****
+0400000US55,55,Wisconsin,001,Total population,5742117,*****
+0400000US56,56,Wyoming,001,Total population,579679,*****
+0400000US72,72,Puerto Rico,001,Total population,3583073,*****
