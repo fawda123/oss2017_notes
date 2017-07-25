@@ -150,5 +150,21 @@ idw_pow1 <- idw(formula = elev_mm ~ 1,
 plot(idw_pow1)
 ```
 
+## Reading netcdf and other open data formats - hierarchical
 
+[info from NEON](https://support.hdfgroup.org/HDF5/)
+
+HDF - hierarchical data format, they store different types of data.  Embedded metadata. 
+
+[HDFview](https://support.hdfgroup.org/HDF5/) - a lightweight Java application for viewing structure of HDF files.
+
+CF conventions - tagging of metadata for processing with other software. 
+
+NetCDF is a wrapper to HDF5. 
+
+Can store images, text, etc. 
+
+Different from a database?  HDF4, NetCDF are similar but archivable.  Text file access/speed work better with databases but it's not a place to archive. 
+
+ncdump - program used by NCEAS for getting metadata from netcdf.  
 
