@@ -154,6 +154,8 @@ plot(idw_pow1)
 
 [info from NEON](https://support.hdfgroup.org/HDF5/)
 
+[Bryce's link](http://brycemecum.com/2014/02/18/working-with-netcdf-files-in-r.html)
+
 HDF - hierarchical data format, they store different types of data.  Embedded metadata. 
 
 [HDFview](https://support.hdfgroup.org/HDF5/) - a lightweight Java application for viewing structure of HDF files.

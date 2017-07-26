@@ -7,3 +7,13 @@ author: "Marcus W. Beck, beck.marcus@epa.gov"
 ---
 
 ## Dataviz
+
+ggplot `last_plot()` shows the last plot in the ggplot stack
+
+## Perfunctory Python
+
+[Notes](https://nceas.github.io/oss-lessons/why-python/python-the-why.html#(1))
+
+Python is good at time series... 
+
+Pandas is like dplyr
