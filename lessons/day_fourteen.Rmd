@@ -1,0 +1,33 @@
+---
+title: "Day fourteen - 7/27"
+output: 
+  html_document:
+  keep_md: yes
+author: "Marcus W. Beck, beck.marcus@epa.gov"
+---
+
+## Parallel processing
+
+[Notes](https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html)
+
+Why processing can take a long time:
+
+* cpu-bound: takes too much time on cpu
+* memory-bound: takes too much memory
+* I/O bound: too much time reading/writing to disc (processor is idle)
+* network-bound: too much time to transfer
+
+In the past, one processer with one core, now one processor and several cores.  The cores are doing the work and integrated on the same processes.  Some cores are 'hyper-threaded', meaning the ability to process things kind of of in parallel on the same core.  Some people count this as threads as individual cores, but this is debatable.  
+
+From command line `systeminfo` to view system info.  
+
+Multi-core processing - sending jobs to multiple cores on the same machine for parallelization.
+
+Cluster processing - sendinb jobs to multiple cores across nodes/computers.  
+
+`mclapply` - mc is multicluster on same machine (but does not work on Windows).  You can do cluster processing in R too but we're not covering that here.  
+
+User, system, elapsed time from system time - user is your job, system is time for other stuff your computer is doing, elapsed is 'wall clock' time.  In parallel, the user time will be much longer than elapsed time because it's a sum of the time across the cores that were used.  
+
+
+
