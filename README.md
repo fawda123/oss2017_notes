@@ -1,9 +1,6 @@
----
-title: "README"
-output: 
-  html_document:
-  keep_md: yes
----
+## README
+
+See lesson outlines [here](https://nceas.github.io/oss-2017/lessons.html)
 
 To do: 
 
